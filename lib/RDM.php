@@ -272,6 +272,7 @@ class RDM extends Scanner
             $pokestop["longitude"] = floatval($pokestop["longitude"]);
 			$pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
 			$pokestop["lure_expiration"] = $pokestop["lure_expiration"] * 1000;
+            $pokestop["lure_id"] = 1;
             if ($noTrainerName === true) {
                 // trainer names hidden, so don't show trainer who lured
                 unset($pokestop["lure_user"]);
@@ -363,7 +364,7 @@ class RDM extends Scanner
         raid_level,
         raid_pokemon_move_1,
         raid_pokemon_move_2,
-        raid_pokemon_form AS form,
+        raid_pokemon_form,
         raid_pokemon_cp,
         ex_raid_eligible AS park
         FROM gym
@@ -390,6 +391,7 @@ class RDM extends Scanner
             $gym["pokemon"] = [];
             $gym["guard_pokemon_name"] = empty($guard_pid) ? null : i8ln($this->data[$guard_pid]["name"]);
             $gym["raid_pokemon_name"] = empty($raid_pid) ? null : i8ln($this->data[$raid_pid]["name"]);
+            $gym["form"] = intval($gym["raid_pokemon_form"]);
             $gym["latitude"] = floatval($gym["latitude"]);
             $gym["longitude"] = floatval($gym["longitude"]);
             //$gym["sponsor"] = intval($gym["sponsor"]);

@@ -293,7 +293,8 @@ class RocketMap_MAD extends RocketMap
         url,
         is_ex_raid_eligible AS park,
         level AS raid_level, 
-        pokemon_id AS raid_pokemon_id, 
+        raid.pokemon_id AS raid_pokemon_id, 
+        raid.form AS raid_pokemon_form, 
         cp AS raid_pokemon_cp, 
         move_1 AS raid_pokemon_move_1, 
         move_2 AS raid_pokemon_move_2, 
@@ -327,6 +328,7 @@ class RocketMap_MAD extends RocketMap
             $gym["pokemon"] = [];
             $gym["guard_pokemon_name"] = empty($guard_pid) ? null : i8ln($this->data[$guard_pid]["name"]);
             $gym["raid_pokemon_name"] = empty($raid_pid) ? null : i8ln($this->data[$raid_pid]["name"]);
+            $gym["form"] = intval($gym["raid_pokemon_form"]);
             $gym["latitude"] = floatval($gym["latitude"]);
             $gym["longitude"] = floatval($gym["longitude"]);
             $gym["last_modified"] = $gym["last_modified"] * 1000;
@@ -525,6 +527,7 @@ class RocketMap_MAD extends RocketMap
             $pokestop["latitude"] = floatval($pokestop["latitude"]);
             $pokestop["longitude"] = floatval($pokestop["longitude"]);
             $pokestop["lure_expiration"] = !empty($pokestop["lure_expiration"]) ? $pokestop["lure_expiration"] * 1000 : null;
+            $pokestop["lure_id"] = 1;
             $pokestop["url"] = ! empty($pokestop["url"]) ? str_replace("http://", "https://images.weserv.nl/?url=", $pokestop["url"]) : null;
             $pokestop["quest_type"] = intval($pokestop["quest_type"]);
             $pokestop["quest_condition_type"] = intval($pokestop["quest_condition_type"]);
